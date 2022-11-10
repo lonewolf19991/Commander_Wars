@@ -41,7 +41,7 @@ jobs:
     name: All
     strategy:
       matrix:
-        buildTarget: [windows-desktop, windows-server, ubuntu-desktop, ubuntu-server, macos-desktop]
+        buildTarget: [windows-desktop, windows-server, ubuntu-desktop, ubuntu-server, macos-desktop, android-armv7, android-arm64_v8a]
         include:
           - buildTarget: windows-desktop
             os: windows-latest
@@ -83,7 +83,44 @@ jobs:
             source_asset: 'Commander_Wars.zip'
             asset_name: 'Commander_Wars_Ubuntu_Server.zip'
             cmakeOptions: '-DGRAPHICSUPPORT=OFF -DAUDIOSUPPORT=OFF'
-         
+          - buildTarget: macos-desktop
+            os: macos-latest
+            COMPILER_VERSION: 'clang_64'
+            qtPath: 'clang_64'
+            target: 'desktop'
+            installerCommands1: ''
+            installerCommands2: ''
+            source_asset: 'Commander_Wars.zip'
+            asset_name: 'Commander_Wars_macOS.zip'
+            cmakeOptions: '-DOPENSSL_ROOT_DIR=/usr/local/opt/openssl'
+          - buildTarget: android-armv7
+            os: windows-latest
+            COMPILER_VERSION: 'android_armv7'
+            qtPath: 'android_armv7'
+            target: 'android'
+            target-api-level: '27'
+            abi : "armeabi-v7a"
+            COMPILER_TOOLS_VERSION: 'win64_mingw'
+            qtCoreToolsPath: 'mingw_64'
+            installerCommands1: 'choco install jom'
+            installerCommands2: ''
+            source_asset: 'android-build/build/outputs/apk/release/android-build-release-signed.apk'
+            asset_name: 'Commander_Wars_armeabi-v7a.apk'
+            cmakeOptions: ''
+          - buildTarget: android-arm64_v8a
+            os: windows-latest
+            COMPILER_VERSION: 'android_arm64_v8a'
+            qtPath: 'android_arm64_v8a'
+            target: 'android'
+            target-api-level: '27'
+            abi : "arm64-v8a"
+            COMPILER_TOOLS_VERSION: 'win64_mingw'
+            qtCoreToolsPath: 'mingw_64'
+            installerCommands1: 'choco install jom'
+            installerCommands2: ''
+            source_asset: 'android-build/build/outputs/apk/release/android-build-release-signed.apk'
+            asset_name: 'Commander_Wars_arm64-v8a.apk'
+            cmakeOptions: ''
 
     needs: create_release
     runs-on: ${{matrix.os}}
