@@ -41,7 +41,7 @@ jobs:
     name: All
     strategy:
       matrix:
-        buildTarget: [windows-desktop, windows-server, ubuntu-desktop, ubuntu-server, macos-desktop, android-armv7, android-arm64_v8a]
+        buildTarget: [windows-desktop, windows-server, ubuntu-desktop, ubuntu-server, macos-desktop]
         include:
           - buildTarget: windows-desktop
             os: windows-latest
