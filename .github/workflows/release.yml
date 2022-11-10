@@ -1,7 +1,3 @@
-on:
-  push:
-    tags:
-      - 'Beta*'
 
 name: Commnader_Wars_Release
 
